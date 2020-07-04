@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Calculator</title>
+
+   
+</head>
+
+<body>
+   
+    <div id="app"> </div>
+
+    <script type="text/babel">
+        var z = "";
+
+
+
+        class Calculator extends React.Component {
+            state = {
+                result: "",
+                finalresult: ""
+            }
+            render() {
+                return (
+                    <div>
+                    <div className="container">
+
+                        <div id="display">
+                            <h5 id="result">{this.state.result}</h5>
+                            < h2  id="finalresult">{this.state.finalresult}</h2>
+                        </div>
+
+                        <br></br>
+                        <button class="upr" onClick={()=> this.clear()} >AC</button>
+                        <button class="upr" onClick={()=> this.del()}>C</button>
+                        <br></br>
+                        <button onClick={()=> this.displayresult("7")} >7</button>
+                        <button onClick={()=> this.displayresult("8")}>8</button>
+                        <button onClick={()=> this.displayresult("9")}>9</button>
+                        <button onClick={()=> this.displayresult("6")}>/</button>
+                        <br></br>
+                        <button onClick={()=> this.displayresult("4")} >4</button>
+                        <button onClick={()=> this.displayresult("5")}>5</button>
+                        <button onClick={()=> this.displayresult("6")}>6</button>
+                        <button onClick={()=> this.displayresult("*")}>x</button>
+                        <br></br>
+                        <button onClick={()=> this.displayresult("1")}>1</button>
+                        <button onClick={()=> this.displayresult("2")}>2</button>
+                        <button onClick={()=> this.displayresult("3")}>3</button>
+                        <button onClick={()=> this.displayresult("-")}>-</button>
+                        <br></br>
+                        <button onClick={()=> this.displayresult(".")}>.</button>
+                        <button onClick={()=> this.displayresult("0")}>0</button>
+                        <button onClick={()=> this.displayresult("00")}>00</button>
+                        <button onClick={()=> this.finalresult()}>=</button>
+                      
+                        <br></br>
+                        <button onClick={()=> this.displayresult("%")}>%</button>
+                        <button onClick={()=> this.displayresult("(")} >(</button>
+                        <button onClick={()=> this.displayresult(")")}>)</button>
+                        <button onClick={()=> this.displayresult("+")}>+</button>
+                  
+                 </div>
+                 <div class="footer">
+                    <h5>Made By Rohittt😎 </h5>
+                </div>
+                 </div>
+                )
+            }
+            displayresult(v){
+
+              
+                console.log("Display ")
+                z +=v
+                this.setState( {result : z , finalresult : ""})
+            }
+
+            clear(){
+                z=""
+                this.setState({result :"0", finalresult: ""})
+            }
+
+            del(){
+                const s = this.state.result ;
+                z=s.substring(0,s.length-1)
+                this.setState({result : z , finalresult : ""})
+                
+            }
+            finalresult(){
+              try{
+                var q=this.state.result;
+                var w=eval(q)
+                if(w.length>9){
+                    this.setState({result: "" , finalresult : "INVALID"})
+                }else{
+                 this.setState({result: "" , finalresult : w})
+                } 
+            }catch(error){
+                this.setState({result:"",finalresult: "INVALID INPUT"})
+            }
+
+        
+                
+            
+            }
+          
+            
+        }
+        ReactDOM.render(<Calculator />, document.getElementById("app"))
+    </script>
+</body>
+
+</html>
